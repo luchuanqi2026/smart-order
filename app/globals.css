@@ -569,7 +569,7 @@ button:disabled {
 .grid-header,
 .grid-row {
   display: grid;
-  grid-template-columns: 64px 160px 150px 150px 150px 260px 160px 220px 130px 160px 220px 88px;
+  grid-template-columns: 64px 92px 160px 150px 150px 150px 260px 160px 220px 130px 160px 220px;
 }
 
 .grid-header {
@@ -601,9 +601,9 @@ button:disabled {
   width: 100%;
   min-width: 0;
   height: 28px;
-  border: 1px solid transparent;
+  border: 1px solid #dbe6ee;
   border-radius: 5px;
-  background: transparent;
+  background: #fff;
   color: var(--ink);
   padding: 0 6px;
   outline: none;
@@ -613,6 +613,16 @@ button:disabled {
 .cell-input:focus {
   border-color: var(--brand);
   background: white;
+}
+
+.row-action-button {
+  width: 72px;
+  min-width: 72px;
+  height: 28px;
+  min-height: 28px;
+  gap: 4px;
+  padding: 0 8px;
+  font-size: 12px;
 }
 
 .grid-cell.error {

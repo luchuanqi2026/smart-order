@@ -7,6 +7,16 @@ coverage
 .env
 .env*.local
 data/store.json
+smart-order-import-v2-github
+smart-order-import-v2-github.zip
+next-dev.out.log
+next-dev.err.log
+tsconfig.tsbuildinfo
+.playwright-mcp
+import-ui-after.png
+import-ui-with-data.png
+header-title-large.png
+import-first-style-green.png
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

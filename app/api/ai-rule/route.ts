@@ -95,6 +95,22 @@ function normalizeGeneratedRule(fallbackRule: ParserRule, candidate: Partial<Par
     id: fallbackRule.id,
     createdAt: fallbackRule.createdAt,
     updatedAt: new Date().toISOString(),
+    table: {
+      ...fallbackRule.table,
+      ...(isRecord(candidate.table) ? candidate.table : {})
+    },
+    matrix: {
+      ...fallbackRule.matrix,
+      ...(isRecord(candidate.matrix) ? candidate.matrix : {})
+    },
+    text: {
+      ...fallbackRule.text,
+      ...(isRecord(candidate.text) ? candidate.text : {})
+    },
+    cards: {
+      ...fallbackRule.cards,
+      ...(isRecord(candidate.cards) ? candidate.cards : {})
+    },
     mappings: FIELD_KEYS.map((field) => normalizeMapping(field, candidate.mappings, fallbackRule.mappings))
   };
   return next;
@@ -115,9 +131,17 @@ function normalizeMapping(field: FieldKey, candidateMappings: unknown, fallbackM
   }
 
   const rawSource = isRecord(raw.source) ? raw.source : undefined;
-  const sourceType = typeof rawSource?.type === "string" && validSourceTypes.has(rawSource.type as SourceType)
+  let sourceType = typeof rawSource?.type === "string" && validSourceTypes.has(rawSource.type as SourceType)
     ? rawSource.type as SourceType
     : fallback.source.type;
+  if (
+    rawSource &&
+    typeof rawSource.pattern === "string" &&
+    rawSource.pattern &&
+    (sourceType !== "column" || rawSource.columnIndex === undefined)
+  ) {
+    sourceType = "regex";
+  }
   const source = rawSource
     ? ({
         ...fallback.source,

@@ -55,12 +55,12 @@ export function PreviewGrid({ rows, issues, onChange, onDelete, onAdd }: Preview
       <div className="grid-inner">
         <div className="grid-header">
           <div className="grid-cell">行号</div>
+          <div className="grid-cell">操作</div>
           {FIELD_KEYS.map((field) => (
             <div className="grid-cell" key={field}>
               {FIELD_LABELS[field]}
             </div>
           ))}
-          <div className="grid-cell">操作</div>
         </div>
         <div ref={parentRef} style={{ height: 520, overflowY: "auto", position: "relative" }}>
           <div style={{ height: virtualizer.getTotalSize(), position: "relative" }}>
@@ -77,6 +77,18 @@ export function PreviewGrid({ rows, issues, onChange, onDelete, onAdd }: Preview
                   }}
                 >
                   <div className={cellClass(rowIssues, "row")}>{virtualRow.index + 1}</div>
+                  <div className="grid-cell">
+                    <button
+                      aria-label={`删除第 ${virtualRow.index + 1} 行`}
+                      className="button danger row-action-button"
+                      onClick={() => onDelete(row.id)}
+                      title="删除行"
+                      type="button"
+                    >
+                      <Trash2 size={14} />
+                      删除
+                    </button>
+                  </div>
                   {FIELD_KEYS.map((field) => (
                     <div className={cellClass(rowIssues, field)} key={field}>
                       <input
@@ -87,17 +99,6 @@ export function PreviewGrid({ rows, issues, onChange, onDelete, onAdd }: Preview
                       />
                     </div>
                   ))}
-                  <div className="grid-cell">
-                    <button
-                      aria-label="删除行"
-                      className="button danger icon-button"
-                      onClick={() => onDelete(row.id)}
-                      title="删除行"
-                      type="button"
-                    >
-                      <Trash2 size={15} />
-                    </button>
-                  </div>
                 </div>
               );
             })}
