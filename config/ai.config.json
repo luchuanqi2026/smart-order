@@ -1,0 +1,7 @@
+{
+  "provider": "deepseek",
+  "baseUrl": "https://api.deepseek.com",
+  "model": "deepseek-v4-flash",
+  "apiKey": "",
+  "temperature": 0.1
+}
